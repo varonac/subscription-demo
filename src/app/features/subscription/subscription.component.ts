@@ -10,6 +10,13 @@ import {
   IgxIconComponent,
 } from 'igniteui-angular';
 
+const definedAlarms = [
+  'Wind speed low start condition',
+  'Yaw wind speed low yaw enable',
+  'WTG system ok',
+  'Pit ALU container level L warn',
+];
+
 @Component({
   selector: 'app-subscription',
   standalone: true,
@@ -27,12 +34,7 @@ import {
   styleUrl: './subscription.component.scss',
 })
 export class SubscriptionComponent implements OnInit {
-  alarms = [
-    'Wind speed low start condition',
-    'Yaw wind speed low yaw enable',
-    'WTG system ok',
-    'Pit ALU container level L warn',
-  ];
+  alarms = [...definedAlarms];
 
   subscriptions = [
     { name: 'Wind speed low start condition', creation: '01/02/2024' },
@@ -44,7 +46,7 @@ export class SubscriptionComponent implements OnInit {
 
   delete(name: string) {
     this.subscriptions = this.subscriptions.filter((s) => s.name !== name);
-    this.updateAlarmList();
+    this.alarms.push(name);
   }
 
   add(name: string) {
