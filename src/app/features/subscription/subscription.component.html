@@ -1,0 +1,29 @@
+<h3 class="m-3">Existing subscriptions</h3>
+<igx-grid class="m-3 h-96 w-full" [primaryKey]="'name'" [data]="subscriptions">
+  <igx-column field="name" header="Name"></igx-column>
+  <igx-column field="creation" header="Creation"></igx-column>
+  <igx-action-strip #actionstrip>
+    <button
+      title="Delete"
+      igxIconButton="flat"
+      igxRipple
+      (click)="delete(actionstrip.context.data.name)"
+    >
+      <igx-icon>delete</igx-icon>
+    </button>
+  </igx-action-strip>
+</igx-grid>
+<div class="w-full m-3 flex flex-row flex-nowrap justify-between">
+  <igx-select #alarmSelector class="shrink">
+    <label igxLabel>New subscription</label>
+    <igx-select-item *ngFor="let alarm of alarms" [value]="alarm">
+      {{ alarm }}
+    </igx-select-item> </igx-select
+  ><button
+    igxButton="raised"
+    [disabled]="!alarmSelector.selectedItem"
+    (click)="add(alarmSelector.selectedItem.value)"
+  >
+    Add
+  </button>
+</div>
